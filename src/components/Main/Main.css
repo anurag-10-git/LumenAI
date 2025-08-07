@@ -1,7 +1,6 @@
 .main {
   flex: 1;
   min-height: 100vh;
-  padding-bottom: 15vh;
   position: relative;
 }
 
@@ -25,7 +24,6 @@
 }
 
 .main .greet {
-  margin: 50px 0;
   font-size: 56px;
   color: #c4c4c5;
   font-weight: 500;
@@ -52,6 +50,7 @@
   border-radius: 10px;
   position: relative;
   cursor: pointer;
+  margin-bottom: 100px;
 }
 
 .main .card img {
@@ -71,4 +70,49 @@
 
 .main .card:hover {
   background-color: #dfe4ea;
+}
+
+.main-bottom {
+  bottom: 0;
+  width: 100%;
+  max-width: 900px;
+  padding: 0 20px;
+  margin: auto;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background-color: #f0f4f9;
+  padding: 10px 20px;
+  border-radius: 50px;
+}
+
+.search-box img {
+  width: 24px;
+  cursor: pointer;
+}
+
+.search-box input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 8px;
+  font-size: 18px;
+}
+
+.search-box div {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.main .bottom-info {
+  font-size: 13px;
+  margin: 15px auto;
+  text-align: center;
+  font-weight: 300;
 }
