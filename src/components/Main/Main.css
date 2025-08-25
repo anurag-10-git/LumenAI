@@ -50,7 +50,7 @@
   border-radius: 10px;
   position: relative;
   cursor: pointer;
-  margin-bottom: 100px;
+  /* margin-bottom: 100px; */
 }
 
 .main .card img {
@@ -74,6 +74,7 @@
 
 .main-bottom {
   bottom: 0;
+  position: absolute;
   width: 100%;
   max-width: 900px;
   padding: 0 20px;
