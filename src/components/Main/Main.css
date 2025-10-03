@@ -177,3 +177,22 @@
     background-position: 800px 0px;
   }
 }
+
+@media (max-width: 640px) {
+  .main-bottom input {
+    flex: none;
+    width: 150px;
+  }
+
+  .main-bottom img {
+    width: 20px;
+  }
+
+  .search-box {
+    padding: 5px 10px;
+  }
+
+  .search--box div {
+    gap: 5px;
+  }
+}

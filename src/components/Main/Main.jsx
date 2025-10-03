@@ -5,13 +5,20 @@ import { useContext } from 'react'
 import DOMPurify from 'dompurify';
 
 
+const preWrittenContent = [
+  {imageSrc: assets.compass_icon , content: 'Suggest beautiful places to see on an upcoming road trip'},
+  {imageSrc: assets.bulb_icon , content: 'Briefly summarize this concept: urban planning'},
+  {imageSrc: assets.message_icon , content: 'Brainstorm team bonding activities for our work retreat'},
+  {imageSrc: assets.code_icon , content: 'Improve the readability of the following code'},
+]
+
 const Main = () => {
   const {onSent, recentPrompt, showResult, loading, resultData, setInput, input} = useContext(Context)
 
   return (
     <div className='main'>
       <div className="nav">
-        <p>Lumen</p>
+        <p>Lumen AI</p>
         <img src={assets.user_icon} alt="" />
       </div>
       <div className="main-container">
@@ -21,22 +28,12 @@ const Main = () => {
           <p>How can i help you today?</p>
         </div>
         <div className="cards">
-          <div className="card">
-            <p>Suggest beautiful places to see on an upcoming road trip</p>
-            <img src={assets.compass_icon} alt="" />
-          </div>
-          <div className="card">
-            <p>Briefly summarize this concept: urban planning</p>
-            <img src={assets.bulb_icon} alt="" />
-          </div>
-          <div className="card">
-            <p>Brainstorm team bonding activities for our work retreat</p>
-            <img src={assets.message_icon} alt="" />
-          </div>
-          <div className="card">
-            <p>Improve the readability of the following code</p>
-            <img src={assets.code_icon} alt="" />
-          </div>
+          {preWrittenContent.map((item, index) => (
+            <div onClick={() => onSent(item.content)} className="card" key={index}>
+              <p>{item.content}</p>
+              <img src={item.imageSrc} alt="" />
+            </div>
+          ))}
         </div>
         </> : <div className='result'>
           <div className="result-title">
@@ -59,11 +56,11 @@ const Main = () => {
             <div>
               <img src={assets.gallery_icon} alt="" />
               <img src={assets.mic_icon} alt="" />
-              <img src={assets.send_icon} onClick={() => onSent()} alt="" />
+              {input && <img src={assets.send_icon} onClick={() => onSent()} alt="" />}
             </div>
           </div>
           <p className='bottom-info'>
-            Gemini may display inaccurate info, including about people, so double-check its
+            Lumen AI may display inaccurate info, including about people, so double-check its
           </p>
         </div>
       </div>

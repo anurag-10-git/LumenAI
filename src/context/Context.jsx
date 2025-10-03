@@ -17,17 +17,31 @@ const ContextProvider = ({ children }) => {
     }, 75 * index)
   }
 
-  const onSent = useCallback(async () => {
+  const newChat = () => {
+    setLoading(false)
+    setShowResult(false)
+  }
+
+  const onSent = useCallback(async (prompt) => {
     setResultData("")
     setLoading(true)
     setShowResult(true)
     setRecentPrompt(input)
-    setPrevPrompts(prev => [...prev, input])
-    const response = await main(input)
+    let response;
+    if (prompt !== undefined) {
+      response = await main(prompt)
+      setRecentPrompt(prompt)
+    } else {
+      setPrevPrompts(prev => [...prev, input])
+      setRecentPrompt(input)
+      response = await main(input)
+    }
+
     let responseArray = response.split("**")
-    let newResponse;
+    let newResponse = "";
+
     for (let i=0; i < responseArray.length; i++) {
-      if (i === 0 || i%2 !== 1) {
+      if (i === 0 || i % 2 !== 1) {
         newResponse += responseArray[i]
       } else {
         newResponse += "<b>"+responseArray[i]+"</b>"
@@ -40,6 +54,7 @@ const ContextProvider = ({ children }) => {
       const nextWord = newResponseArray[i]
       delayPara(i, nextWord + " ")
     }
+
     setLoading(false)
     setInput("")
   }, [input])
@@ -54,7 +69,8 @@ const ContextProvider = ({ children }) => {
     loading,
     resultData,
     setInput,
-    input
+    input,
+    newChat
   }
 
   return (
