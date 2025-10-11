@@ -6,14 +6,20 @@ import DOMPurify from 'dompurify';
 
 
 const preWrittenContent = [
-  {imageSrc: assets.compass_icon , content: 'Suggest beautiful places to see on an upcoming road trip'},
-  {imageSrc: assets.bulb_icon , content: 'Briefly summarize this concept: urban planning'},
-  {imageSrc: assets.message_icon , content: 'Brainstorm team bonding activities for our work retreat'},
-  {imageSrc: assets.code_icon , content: 'Improve the readability of the following code'},
+  { imageSrc: assets.compass_icon, content: 'Suggest beautiful places to see on an upcoming road trip' },
+  { imageSrc: assets.bulb_icon, content: 'Briefly summarize this concept: urban planning' },
+  { imageSrc: assets.message_icon, content: 'Brainstorm team bonding activities for our work retreat' },
+  { imageSrc: assets.code_icon, content: 'Improve the readability of the following code' },
 ]
 
 const Main = () => {
-  const {onSent, recentPrompt, showResult, loading, resultData, setInput, input} = useContext(Context)
+  const { onSent, recentPrompt, showResult, loading, resultData, setInput, input } = useContext(Context)
+
+  const onPressEnter = (e) => {
+    if (e.key === 'Enter' && input.length !== 0) { onSent() }
+  }
+
+  console.log(resultData)
 
   return (
     <div className='main'>
@@ -23,18 +29,18 @@ const Main = () => {
       </div>
       <div className="main-container">
         {!showResult ? <>
-        <div className="greet">
-          <p><span>Hello, Dev.</span></p>
-          <p>How can i help you today?</p>
-        </div>
-        <div className="cards">
-          {preWrittenContent.map((item, index) => (
-            <div onClick={() => onSent(item.content)} className="card" key={index}>
-              <p>{item.content}</p>
-              <img src={item.imageSrc} alt="" />
-            </div>
-          ))}
-        </div>
+          <div className="greet">
+            <p><span>Hello, Dev.</span></p>
+            <p>How can i help you today?</p>
+          </div>
+          <div className="cards">
+            {preWrittenContent.map((item, index) => (
+              <div onClick={() => onSent(item.content)} className="card" key={index}>
+                <p>{item.content}</p>
+                <img src={item.imageSrc} alt="" />
+              </div>
+            ))}
+          </div>
         </> : <div className='result'>
           <div className="result-title">
             <img src={assets.user_icon} alt="" />
@@ -47,12 +53,13 @@ const Main = () => {
               <hr />
               <hr />
             </div>
-              : <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(resultData) }}></p>}
+              : <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(resultData) }}></p>
+            }
           </div>
-        </div> }
+        </div>}
         <div className="main-bottom">
           <div className="search-box">
-            <input value={input} onChange={(e) => setInput(e.target.value)} type="text" placeholder='Enter a prompt here!' />
+            <input onKeyDown={onPressEnter} value={input} onChange={(e) => setInput(e.target.value)} type="text" placeholder='Enter a prompt here!' />
             <div>
               <img src={assets.gallery_icon} alt="" />
               <img src={assets.mic_icon} alt="" />
